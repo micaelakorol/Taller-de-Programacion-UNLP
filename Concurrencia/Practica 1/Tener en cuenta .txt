@@ -1,9 +1,0 @@
-
-{ "areas" reflejan las memorias:
-area compartida = area asignada a todos los robot
-area parcialmente compartida = area que asigno a algunos robots.
-area privada = area que asigno a un unico robot.
-
-Comportamientos distintos = Diferentes tipos robots
-Ej: uno junta flores y otro papeles.
-}

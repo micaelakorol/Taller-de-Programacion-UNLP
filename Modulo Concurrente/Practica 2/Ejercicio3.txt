@@ -1,0 +1,51 @@
+programa ejemplo
+procesos
+  proceso recorrerAvenida
+  comenzar
+    Pos(PosAv, PosCa)
+    repetir 10
+      mover
+  fin
+areas
+  ciudad1: AreaC (1,1,100,100)
+robots
+  robot robot1
+  comenzar
+    recorrerAvenida
+    EnviarMensaje(1,a2) {cuando termina de recorrer le envia el mensaje para q comience a2}
+  fin
+  robot robot2
+  variables
+    aux:numero
+  comenzar
+    RecibirMensaje(aux,a1)
+    recorrerAvenida
+  fin 
+  robot robot3
+  comenzar
+    recorrerAvenida
+    EnviarMensaje(2, b2)
+  fin   
+  robot robot4
+  variables
+    aux:numero
+  comenzar
+    RecibirMensaje(aux,b1) {espera recibir el mensaje de b1 para comenzar}
+    recorrerAvenida
+  fin
+  
+variables
+  a1:robot1
+  a2:robot2
+  b1:robot3
+  b2:robot4
+comenzar
+  AsignarArea(a1, ciudad1)
+  AsignarArea(a2, ciudad1)
+  AsignarArea(b1, ciudad1)
+  AsignarArea(b2, ciudad1)
+  Iniciar(a1, 1,1)
+  Iniciar(b1, 2,5)
+  Iniciar(a2, 3,1)
+  Iniciar(b2, 4,5)
+fin

@@ -1,0 +1,70 @@
+
+programa ejemplo
+
+procesos
+  proceso escalera(E ancho: numero; E alto:numero; ES cont:numero)
+  variables
+    flores,papeles:numero
+  comenzar
+    flores := 0
+    papeles := 0
+    Pos(PosAv, PosCa)
+    repetir 4 {Total de escalones}
+      repetir alto {alto de la escalera}
+        mover
+      derecha
+      repetir ancho {ancho}
+        mientras HayFlorEnLaEsquina
+          tomarFlor
+          flores := flores + 1
+        mientras HayPapelEnLaEsquina
+          tomarPapel
+          papeles := papeles + 1
+        mover
+      repetir 3
+        derecha
+    si flores > papeles
+      cont := cont + 1
+  fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot robot1
+  variables
+    ancho, alto, cont:numero
+  comenzar
+    cont := 0
+    ancho := 1 {siempre es de 1}
+    RecibirMensaje(alto, rj)
+    escalera(ancho,alto, cont)
+    EnviarMensaje(cont,rj)
+  fin
+  robot jefe
+  variables
+    quienEs, suma, aux, aux2:numero
+  comenzar 
+    suma := 0
+    Random(aux,1,5)
+    EnviarMensaje(aux,r1) {Le envia el alto fijo aleatorio entre 1 y 5}
+    Random(aux,1,5)
+    EnviarMensaje(aux,r2)
+    Random(aux,1,5)
+    EnviarMensaje(aux,r3)
+    repetir 3
+      RecibirMensaje(suma, *)
+      aux2 := aux + suma
+    Informar(aux2)
+  fin
+variables
+  r1,r2,r3: robot1
+  rj:jefe
+comenzar
+  AsignarArea(r1, ciudad)
+  AsignarArea(r2, ciudad)
+  AsignarArea(r3, ciudad)  
+  AsignarArea(rj, ciudad)
+  Iniciar(r1, 2,1)
+  Iniciar(rj, 1,1)
+  Iniciar(r2, 7,12)
+  Iniciar(r3, 12,1)
+fin

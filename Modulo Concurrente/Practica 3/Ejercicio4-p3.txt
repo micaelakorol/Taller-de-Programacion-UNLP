@@ -1,0 +1,57 @@
+programa ejemplo
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot robot1  
+  variables
+    av,ca,quienSoy:numero
+    avIni,caIni:numero
+    ok:boolean
+  comenzar
+    avIni := PosAv
+    ok := V
+    caIni := PosCa
+    RecibirMensaje(quienSoy,rc)
+    {Si no salto primero a la posicion, el programa nunca empieza}
+    {Primero deberia saltar a la posicion}
+    mientras ok
+      BloquearEsquina(10,10)
+      Pos(10,10) {Tengo que ir si o si a la esquina para ver si hay flores}
+      si HayFlorEnLaEsquina
+        tomarFlor
+        BloquearEsquina(11,11)
+        Pos(11,11)
+        LiberarEsquina(10,10)
+        si HayFlorEnLaBolsa
+          depositarFlor
+        Pos(avIni,caIni)
+        LiberarEsquina(11,11)
+      sino 
+        ok := F
+        Pos(avIni,caIni)
+        LiberarEsquina(10,10) {si no hay, la libero}
+    {enviar que terminé}
+    EnviarMensaje(quienSoy,rc)
+  fin
+  robot coordinador
+  variables
+    primero,ultimo:numero
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    RecibirMensaje(primero,*)
+    RecibirMensaje(ultimo,*)
+    Informar(ultimo)
+  fin
+  
+variables
+  r1,r2: robot1
+  rc:coordinador
+comenzar
+  AsignarArea(r1, ciudad)
+  AsignarArea(r2, ciudad)
+  AsignarArea(rc, ciudad)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 2,1)
+  Iniciar(rc, 5,1)
+fin

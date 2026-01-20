@@ -1,0 +1,52 @@
+programa ejemplo
+
+procesos
+  proceso recorrerAvenida(ES av:numero)
+  comenzar
+    Pos(av, 1)
+    repetir 99
+      mover
+  fin
+areas
+  ciudad1: AreaP (1,1,25,100)
+  ciudad2: AreaP (26,1,50,100)
+  ciudad3: AreaP (51,1,75,100)
+  ciudad4: AreaP (76,1,100,100)
+robots
+  robot robot1
+  variables
+    av:numero
+  comenzar
+    av := 1
+    repetir 24
+      recorrerAvenida(av)
+      av := av + 1
+    av := 51
+    repetir 24
+      recorrerAvenida(av)
+      av := av + 1
+  fin
+  robot robot2
+  variables
+    av:numero
+  comenzar
+    av := 26
+    repetir 24
+      recorrerAvenida(av) {le envio la avenida a la que tiene que saltar}
+      av := av + 1
+    av := 76
+    repetir 24
+      recorrerAvenida(av)
+      av := av + 1
+  fin
+variables
+  r1: robot1
+  r2: robot2
+comenzar
+  AsignarArea(r1, ciudad1)
+  AsignarArea(r2, ciudad2)
+  AsignarArea(r1, ciudad3)
+  AsignarArea(r2, ciudad4)
+  Iniciar(r1, 1,1) {Esto se inicia una sola vez}
+  Iniciar(r2, 26,1)  
+fin

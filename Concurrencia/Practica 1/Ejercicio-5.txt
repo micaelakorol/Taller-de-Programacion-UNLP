@@ -1,0 +1,86 @@
+{Como debo depositar las flores que junté , es mejor hacer un contador = repetir contador..}
+{Vaciar la bolsa = meintras}
+programa ejemplo
+procesos
+  proceso recorrerEsquinas(E av:numero; E ca:numero; ES contador:numero)
+  comenzar
+  {primero poner el mientras y depsues moverse}
+    contador := 0
+    Pos(av, ca)
+    derecha
+    repetir 15
+      mover
+      mientras HayFlorEnLaEsquina
+        tomarFlor
+        contador := contador + 1
+    depositarFlores(contador)
+  fin
+  
+  proceso recorrerAv(E av:numero; E ca:numero; ES contador:numero)
+  comenzar 
+    contador := 0
+    Pos(av,ca)
+    repetir 20
+      mover
+      mientras HayPapelEnLaEsquina
+        tomarPapel
+        contador := contador + 1
+    depositarPapeles(contador)
+  fin
+  
+  proceso depositarPapeles(E contador:numero)
+  comenzar
+    repetir contador
+      depositarPapel
+  fin
+  
+  proceso depositarFlores(E contador:numero)
+  comenzar
+    repetir contador
+      depositarFlor
+  fin 
+areas
+  ciudad1: AreaP (1,75,16,75) {Calle 75 , av 1 a 16}
+  ciudad2: AreaP(1,80, 16, 80) {Calle 80 , av 1 a 16}
+  ciudad3: AreaP(80,80,80,100) {desde: av 80 , calle 80 hasta calle 100}
+  ciudad4: AreaP(75,80,75,100) {debe dejar los papeles en 80,75?}
+  
+robots
+  robot robot1
+  variables
+    av,ca,contador:numero
+  comenzar
+    av := 1
+    ca := 75
+    recorrerEsquinas(av,ca,contador)
+    repetir 3
+      derecha
+    av := 1
+    ca := 80
+    recorrerEsquinas(av,ca,contador) 
+  fin
+  
+  robot robot2
+  variables
+    av,ca,contador:numero
+  comenzar
+    av := 80
+    ca := 80
+    recorrerAv(av,ca,contador)
+    av := 75
+    ca := 80
+    recorrerAv(av,ca,contador)
+  fin
+  
+  
+variables
+  r1: robot1
+  r2: robot2
+comenzar
+  AsignarArea(r1, ciudad1)
+  AsignarArea(r1, ciudad2)
+  AsignarArea(r2, ciudad3)
+  AsignarArea(r2, ciudad4)
+  Iniciar(r1, 1,75)
+  Iniciar(r2, 80,80)
+fin
